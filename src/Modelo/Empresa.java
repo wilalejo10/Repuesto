@@ -69,32 +69,4 @@ public class Empresa
             obp.mensaje("El total recaudado por la tienda es: $" + compras.get(i).getRecaudo());
         }
     }
-
-
-
-
-
-
-    /*
-    public int precioTotal(){
-       int precio;
-       precio=obp.solicitarEnteros("Ingrese el precio del repuesto");
-
-       return precio;
-    }
-
-    public void registrarClientes(){
-        String nom, nomRe;
-        int tel;
-        for(int i=0; i<clientes.length; i++){
-            nom=obp.solicitarString("Ingrese el nombre del cliente #"+(i+1));
-            tel=obp.solicitarEnteros("Ingrese el telefono del cliente #"+(i+1));
-            nomRe=obp.solicitarString("Ingrese el repuesto que quiere del cliente #"+(i+1));
-
-            Cliente e=new Cliente(nom,tel, nomRe);
-
-            clientes[i]=e;
-        }
-    }
-    */
 }
