@@ -25,10 +25,6 @@ public class InOut
         String d= JOptionPane.showInputDialog(m);
         double dato=Double.parseDouble(d);
         return dato;
-       /* Scanner in=new Scanner(System.in);//creamos el objeto scanner
-       System.out.println(m);
-       double dato=in.nextDouble();
-       return dato;*/
     }
 
 }
