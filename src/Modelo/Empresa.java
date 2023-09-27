@@ -24,46 +24,41 @@ public class Empresa
                         "3. Frenos\n" +
                         "Digite su opción:");
 
-        stock=obp.solicitarEnteros("Cantidad de repuestos a comprar:");
-        precio=obp.solicitarDouble("Precio del repuesto:");
+        stock = obp.solicitarEnteros("Cantidad de repuestos a comprar:");
+        precio = obp.solicitarDouble("Precio del repuesto:");
 
-        repuestos.add(new Repuesto(cate,stock,precio));
+        if (stock >= 0 && precio >= 0) {
+            repuestos.add(new Repuesto(cate, stock, precio));
 
-        double subtotal,descuento,total,iva=0.19, recaudo = 0;
+            double subtotal, descuento, total, iva = 0.19, recaudo = 0;
 
-        subtotal = stock * precio;
-        if (subtotal > 5000000) {
-            descuento = subtotal * 0.2;
-        } else {
-            descuento = 0;
-        }
-        total = subtotal - descuento + subtotal * iva;
-        recaudo += total;
-        obp.mensaje("Subtotal: $" + subtotal + "\n" +
-                "Descuento: $" + descuento + "\n" +
-                "IVA: $" + subtotal * iva + "\n" +
-                "Total: $" + total);
-
-
-        compras.add(new Factura(subtotal,descuento,total,recaudo));
-
-        String mensajeStockBajo = "Repuestos con menos de cinco productos en stock:\n";
-        for (int i=0; i<repuestos.size();i++ ) {
-            if (repuestos.get(i).getStock() < 5) {
-                mensajeStockBajo += repuestos.get(i).getCategoria() + " - $" + repuestos.get(i).getPrecio() + "\n";
+            subtotal = stock * precio;
+            if (subtotal > 5000000) {
+                descuento = subtotal * 0.2;
+            } else {
+                descuento = 0;
             }
+            total = subtotal - descuento + subtotal * iva;
+            recaudo += total;
+            obp.mensaje("Subtotal: $" + subtotal + "\n" +
+                    "Descuento: $" + descuento + "\n" +
+                    "IVA: $" + subtotal * iva + "\n" +
+                    "Total: $" + total);
+
+            compras.add(new Factura(subtotal, descuento, total, recaudo));
+
+            String mensajeStockBajo = "Repuestos con menos de cinco productos en stock:\n";
+            for (int i = 0; i < repuestos.size(); i++) {
+                if (repuestos.get(i).getStock() < 5) {
+                    mensajeStockBajo += repuestos.get(i).getCategoria() + " - $" + repuestos.get(i).getPrecio() + "\n";
+                }
+            }
+
+            obp.mensaje(mensajeStockBajo);
+        } else {
+            obp.mensaje("El valor ingresado no es válido. Deben ser números positivos.");
         }
-
-        obp.mensaje(mensajeStockBajo);
-
-
-
-
     }
-
-
-
-
     public void mostrarInformacionCompras(){
         for(int i=0; i<compras.size();i++ ){
             obp.mensaje("El total recaudado por la tienda es: $" + compras.get(i).getRecaudo());
