@@ -5,19 +5,45 @@ import Vista.InOut;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Empresa
-{
+public class Empresa {
     List<Repuesto> repuestos = new ArrayList<>();
     List<Factura> compras = new ArrayList<>();
-    InOut obp=new InOut();
+    InOut obp = new InOut();
 
+    // Constructor y otros métodos aquí...
 
+    public Repuesto encontrarRepuestoMasVendido() {
+        if (repuestos.isEmpty()) {
+            return null; // Retorna null si no hay repuestos registrados
+        }
 
-    public void registrarRepuestos(){
+        Repuesto masVendido = repuestos.get(0); // Inicializa con el primer repuesto
+        for (Repuesto repuesto : repuestos) {
+            if (repuesto.getVentas() > masVendido.getVentas()) {
+                masVendido = repuesto;
+            }
+        }
+        return masVendido;
+    }
+
+    public void mostrarRepuestoMasVendido() {
+        Repuesto masVendido = encontrarRepuestoMasVendido();
+        if (masVendido == null) {
+            obp.mensaje("No hay repuestos registrados.");
+        } else {
+            obp.mensaje("El repuesto más vendido es:\n" +
+                    "Categoría: " + masVendido.getCategoria() + "\n" +
+                    "Stock: " + masVendido.getStock() + "\n" +
+                    "Precio: $" + masVendido.getPrecio() + "\n" +
+                    "Ventas: " + masVendido.getVentas());
+        }
+    }
+
+    public void registrarRepuestos() {
         int cate, stock;
         double precio;
 
-        cate=obp.solicitarEnteros(
+        cate = obp.solicitarEnteros(
                 "Categoría del repuesto:\n" +
                         "1. Motor\n" +
                         "2. Suspensión\n" +
@@ -59,8 +85,9 @@ public class Empresa
             obp.mensaje("El valor ingresado no es válido. Deben ser números positivos.");
         }
     }
-    public void mostrarInformacionCompras(){
-        for(int i=0; i<compras.size();i++ ){
+
+    public void mostrarInformacionCompras() {
+        for (int i = 0; i < compras.size(); i++) {
             obp.mensaje("El total recaudado por la tienda es: $" + compras.get(i).getRecaudo());
         }
     }
